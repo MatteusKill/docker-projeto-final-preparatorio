@@ -1,0 +1,20 @@
+services:
+  db:
+    image: mysql:8.0
+    ports:
+      - "${PORT_DATABASE}: 3306"
+    environment:
+      - MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      - MYSQL_DATABASE: ${MYSQL_DATABASE}
+      - MYSQL_USER: ${MYSQL_USER}
+      - MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./database/init.sql:/docker-entrypoint-initdb.d
+    network:
+      - backend_net
+    
+
+
+networks:
+  backend_net:
