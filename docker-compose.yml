@@ -14,10 +14,21 @@ services:
     networks:
       - backend_net
     
+  api:
+    build:
+      context: ./backend
+    ports:
+      - "${APP_ENV}:8000"
+    volumes:
+      - ./backend/app:/app
+    networks:
+      - frontend_net
+      - backend_net
 
 
 networks:
   backend_net:
+  frontend_net:
 
 volumes:
   mysql_data:
